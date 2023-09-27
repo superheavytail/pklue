@@ -5,7 +5,7 @@
 ## Update Logs
 
 - 2023.09.27: initial commit
-- 2023.09.28: remove redundants and 
+- 2023.09.28: remove redundants
 
 
 # pKLUE : Korean Dataset to Instruction Tuning
