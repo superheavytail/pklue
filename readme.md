@@ -17,11 +17,16 @@
 ## 개요
 
 Instruction Tuning (IST)을 위해 만들어진 데이터셋이 아닌, 일반적인 한국어 고품질 데이터를 IST 가능한 형태로 가공합니다.  
-FLAN(Wei et al., Finetuned language models are zero-shot learners.)
+[FLAN](https://arxiv.org/abs/2109.01652)(Wei et al., Finetuned language models are zero-shot learners.)
 에서 제시한 방법론을 차용하였습니다.
 
-Huggingface datasets 형태로 반환하기 때문에 
-FLAN 리포지토리에서 제공하는 API보다 쉽게 응용할 수 있습니다.
+[Huggingface datasets](https://huggingface.co/docs/datasets/index) 형태로 반환하기 때문에 
+[FLAN 리포지토리](https://github.com/google-research/FLAN)에서 제공하는 API보다 쉽게 응용할 수 있습니다.
+
+### 사용 가능한 데이터셋 목록
+- KULLM-v2
+- KoBEST (BoolQ, Sentineg, WiC, CoPA, hellaswag)
+- KLUE (STS, MRC, NLI, ynat)
 
 ## 데이터 사용 방법
 `mixture.py` 코드의 `get_mixture` 메서드를 이용하면 됩니다.  
@@ -33,7 +38,7 @@ FLAN 리포지토리에서 제공하는 API보다 쉽게 응용할 수 있습니
 my_hf_dataset = get_mixture(dataset_names=['kullm_v2', 'kobest', 'klue'], max_examples=3000, split='train')
 ```
 
-### 데이터 예시
+## 데이터 예시
 ```json
 {"instruction": "아래 문장을 비슷하게 다시 바꿔보세요.\n\n숙소 위치는 찾기 쉽고 일반적인 한국의 반지하 숙소입니다.\n",
  "input": "",
