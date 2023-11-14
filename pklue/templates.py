@@ -35,7 +35,7 @@ What is different with FLAN:
 
 import copy
 
-from korean_utils import bojosa
+from .korean_utils import bojosa
 
 
 datasets = {

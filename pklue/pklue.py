@@ -17,7 +17,7 @@ from typing import List
 import datasets
 from datasets import concatenate_datasets
 
-import processors
+from . import processors
 
 AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue']
 

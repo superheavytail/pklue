@@ -18,7 +18,7 @@ from random import choice
 
 from datasets import Dataset
 
-import templates
+from . import templates
 
 
 def list_to_dataset(l, truncate=None):

@@ -16,8 +16,8 @@
 
 from datasets import load_dataset, concatenate_datasets
 
-from utils import list_to_dataset
-from utils import make_prompts_by_random_template
+from .utils import list_to_dataset
+from .utils import make_prompts_by_random_template
 
 
 def _kullm_v2_processor(max_examples, split):
