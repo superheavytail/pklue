@@ -1,5 +1,5 @@
 <p align="left" width="100%">
-<img src="assets/logo.png" alt="NLP Logo" style="width: 40%;">
+<img src="pklue/assets/logo.png" alt="NLP Logo" style="width: 40%;">
 </p>
 
 ## Update Logs
@@ -28,10 +28,19 @@ Instruction Tuning (IST)을 위해 만들어진 데이터셋이 아닌, 일반�
 - KoBEST (BoolQ, Sentineg, WiC, CoPA, hellaswag)
 - KLUE (STS, MRC, NLI, ynat)
 
+### 설치 방법
+```shell
+git clone https://github.com/nlpai-lab/pKLUE.git
+cd pKLUE
+pip install -e .
+```
+
 ## 데이터 사용 방법
 `mixture.py` 코드의 `get_mixture` 메서드를 이용하면 됩니다.  
 ### 활용 예시
 ```python
+from pklue import get_mixture
+
 # dataset_names: instruction data로 사용할 source dataset list
 # max_examples: 각 데이터셋의 최대 개수를 제한 (기본값: 3000)
 # split: 'train' 또는 'test'
