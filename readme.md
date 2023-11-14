@@ -30,13 +30,15 @@ Instruction Tuning (IST)을 위해 만들어진 데이터셋이 아닌, 일반�
 
 ### 설치 방법
 ```shell
-git clone https://github.com/nlpai-lab/pKLUE.git
-cd pKLUE
-pip install -e .
+pip install pklue
 ```
 
 ## 데이터 사용 방법
-`mixture.py` 코드의 `get_mixture` 메서드를 이용하면 됩니다.  
+`mixture.py` 코드의 `get_mixture` 메서드를 이용하면 됩니다.
+`dataset_names` 매개변수 안에 데이터셋 이름 리스트를 인자로 넣습니다.
+- KULLM-v2: `kullm_v2`
+- KoBEST: `kobest`
+- KLUE: `klue`
 ### 활용 예시
 ```python
 from pklue import get_mixture
