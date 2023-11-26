@@ -535,7 +535,82 @@ datasets = {
             'input': '',
             'output': '{title}'
         }
-    ]
+    ],
+    # required keys::
+    # title, options, answer
+    # answers(example) = ""
+    "ko_arc": [
+        {
+            'instruction': '{query}',
+            'input': '',
+            'output': '{response}'
+        },
+        {  # duplication for increasing probability to be selected
+            'instruction': '{query}',
+            'input': '',
+            'output': '{response}'
+        },
+        {
+            'instruction': '\n{query}',
+            'input': '',
+            'output': '{response}'
+        },
+        {
+            'instruction': '{query}\n',
+            'input': '',
+            'output': '{response}'
+        },
+        {
+            'instruction': '{query}\n\n',
+            'input': '',
+            'output': '{response}'
+        },
+    ],
+    # required keys::
+    # title, options, answer
+    # answers(example) = ""
+    "ko_commongenv2": [  # TODO be modified
+        {
+            'instruction': '{options}\n\n중에서\n\n{title}\n위 제목을 분류한 결과는?',
+            'input': '',
+            'output': '{answer}'
+        },
+    ],
+    # required keys::
+    # title, options, answer
+    # answers(example) = ""
+    "ko_mmlu": [
+        {
+            'instruction': '{input}\nA: {A}\nB: {B}\nC: {C}\nD: {D}',
+            'input': '',
+            'output': '{gold}'
+        },
+        {
+            'instruction': '{input}\n\nA: {A}\nB: {B}\nC: {C}\nD: {D}\n',
+            'input': '',
+            'output': '{gold}'
+        },
+        {
+            'instruction': '{input}\n\nA: {A}\nB: {B}\nC: {C}\nD: {D}',
+            'input': '',
+            'output': '{gold}'
+        },
+        {
+            'instruction': '\n{input}\n\n\nA:\n{A}\nB:\n{B}\nC:\n{C}\nD:\n{D}',
+            'input': '',
+            'output': '{gold}'
+        },
+    ],
+    # required keys::
+    # title, options, answer
+    # answers(example) = ""
+    "ko_truthfulqa": [  # TODO be modified
+        {
+            'instruction': '{options}\n\n중에서\n\n{title}\n위 제목을 분류한 결과는?',
+            'input': '',
+            'output': '{answer}'
+        },
+    ],
 }
 
 
@@ -649,3 +724,32 @@ def _process_klue_ynat(template, **raw_data):
     data['options'] = options
     data['answer'] = options_str[label]
     return {k: v.format_map(data) for k, v in template.items()}
+
+
+def _process_ko_arc(template, **raw_data):
+    # raw_data:
+    #  {'query': 'George는 손을 금방 따뜻하게 하기 위해 문지르는 중입니다. 어떤 피부 표면이 가장 많은 열을 발생시킬까요?',
+    #  'response': '건조한 손바닥'}
+    return {k: v.format_map(raw_data) for k, v in template.items()}
+
+
+def _process_ko_mmlu(template, **raw_data):
+    # raw_data:
+    #   {'input': '이 질문은 다음 정보에 관련이...,
+    #   'A': '...',
+    #   'B': '...',
+    #   'C': '...',
+    #   'D': '...',
+    #   'target': 'A'}
+    data = copy.deepcopy(raw_data)
+    data['gold'] = data[f'{data["target"]}']
+    del(data['target'])
+    return {k: v.format_map(raw_data) for k, v in template.items()}
+
+
+def _process_ko_truthfulqa(template, **raw_data):
+    ...
+
+
+def _process_ko_commongenv2(template, **raw_data):
+    ...

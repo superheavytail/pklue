@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """processors for datasets"""
+import os
 
 from datasets import load_dataset, concatenate_datasets
 
@@ -102,3 +103,16 @@ def _klue_processor(max_examples, split):
     concatenated = concatenate_datasets(list(prompts_datasets.values()))
 
     return concatenated
+
+
+def _arc_processor(max_examples, split):
+    hf_key = os.environ['HF_API_KEY']
+    from huggingface_hub import login
+    login(hf_key)
+    ds = load_dataset("heavytail/ko_arc")['train']
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "ko_arc", None)
