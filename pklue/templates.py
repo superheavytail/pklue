@@ -604,11 +604,31 @@ datasets = {
     # required keys::
     # title, options, answer
     # answers(example) = ""
-    "ko_truthfulqa": [  # TODO be modified
+    "ko_truthfulqa": [
         {
-            'instruction': '{options}\n\n중에서\n\n{title}\n위 제목을 분류한 결과는?',
+            'instruction': '{query}',
             'input': '',
-            'output': '{answer}'
+            'output': '{response}'
+        },
+        {  # duplication for increasing probability to be selected
+            'instruction': '{query}',
+            'input': '',
+            'output': '{response}'
+        },
+        {
+            'instruction': '\n{query}\n',
+            'input': '',
+            'output': '{response}'
+        },
+        {
+            'instruction': '{query}\n',
+            'input': '',
+            'output': '{response}'
+        },
+        {
+            'instruction': '{query}\n\n',
+            'input': '',
+            'output': '{response}'
         },
     ],
 }
@@ -748,7 +768,9 @@ def _process_ko_mmlu(template, **raw_data):
 
 
 def _process_ko_truthfulqa(template, **raw_data):
-    ...
+    # raw_data:
+    # {'query':'...', 'response': '...'}
+    return {k: v.format_map(raw_data) for k, v in template.items()}
 
 
 def _process_ko_commongenv2(template, **raw_data):
