@@ -593,7 +593,7 @@ datasets = {
         {
             'instruction': '{input}\nA: {A}\nB: {B}\nC: {C}\nD: {D}',
             'input': '',
-            'output': '{gold}'
+            'output': '{target}. {gold}'
         },
         {
             'instruction': '{input}\n\nA: {A}\nB: {B}\nC: {C}\nD: {D}\n',
@@ -607,6 +607,11 @@ datasets = {
         },
         {
             'instruction': '\n{input}\n\n\nA:\n{A}\nB:\n{B}\nC:\n{C}\nD:\n{D}',
+            'input': '',
+            'output': '{gold}'
+        },
+        {
+            'instruction': '{input}',
             'input': '',
             'output': '{gold}'
         },
@@ -778,8 +783,7 @@ def _process_ko_mmlu(template, **raw_data):
     #   'target': 'A'}
     data = copy.deepcopy(raw_data)
     data['gold'] = data[f'{data["target"]}']
-    del(data['target'])
-    return {k: v.format_map(raw_data) for k, v in template.items()}
+    return {k: v.format_map(data) for k, v in template.items()}
 
 
 def _process_ko_truthfulqa(template, **raw_data):
