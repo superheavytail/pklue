@@ -19,7 +19,7 @@ from datasets import concatenate_datasets
 
 from . import processors
 
-AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue']
+AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa']
 
 
 def get_mixture(

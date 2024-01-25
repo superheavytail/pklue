@@ -105,7 +105,7 @@ def _klue_processor(max_examples, split):
     return concatenated
 
 
-def _arc_processor(max_examples, split):
+def _ko_arc_processor(max_examples, split):
     hf_key = os.environ['HF_API_KEY']
     from huggingface_hub import login
     login(hf_key)
@@ -116,3 +116,52 @@ def _arc_processor(max_examples, split):
         ds = ds.train_test_split(train_size=max_examples)['train']
 
     prompts = make_prompts_by_random_template(ds, "ko_arc", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _ko_commongenv2_processor(max_examples, split):
+    hf_key = os.environ['HF_API_KEY']
+    from huggingface_hub import login
+    login(hf_key)
+    ds = load_dataset("heavytail/ko_commongenv2")['train']
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "ko_commongenv2", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _ko_mmlu_processor(max_examples, split):
+    hf_key = os.environ['HF_API_KEY']
+    from huggingface_hub import login
+    login(hf_key)
+    ds = load_dataset("heavytail/ko_mmlu")['train']
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "ko_mmlu", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _ko_truthfulqa_processor(max_examples, split):
+    hf_key = os.environ['HF_API_KEY']
+    from huggingface_hub import login
+    login(hf_key)
+    ds = load_dataset("heavytail/ko_truthfulqa")['train']
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "ko_truthfulqa", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
