@@ -165,3 +165,13 @@ def _ko_truthfulqa_processor(max_examples, split):
     return prompts
 
 
+def _korquad_v1_processor(max_examples, split):
+    ds = load_dataset("squad_kor_v1")[split]
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "korquad_v1", None)
+    prompts = list_to_dataset(prompts)
+    return prompts

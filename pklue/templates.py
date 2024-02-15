@@ -651,6 +651,15 @@ datasets = {
             'output': '{response}'
         },
     ],
+    # required keys::
+    # title, context, question, answer
+    "korquad_v1": [
+        {
+            'instruction': 'Title: {title}\n\nBackground: {context}\n\nQuestion: {question}\n\nAnswer:',
+            'input': '',
+            'output': '{answer}'
+        },
+    ],
 }
 
 
@@ -798,3 +807,9 @@ def _process_ko_commongenv2(template, **raw_data):
     return {k: v.format_map(raw_data) for k, v in template.items()}
 
 
+def _process_korquad_v1(template, **raw_data):
+    # raw_data: dict
+    # ['id', 'title', 'context', 'question', 'answers']
+    data = copy.deepcopy(raw_data)
+    data['answer'] = data['answers']['text'][0]
+    return {k: v.format_map(data) for k, v in template.items()}
