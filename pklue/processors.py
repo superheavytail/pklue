@@ -22,12 +22,17 @@ from .utils import make_prompts_by_random_template
 
 
 def _kullm_v2_processor(max_examples, split):
-    kullm_v2 = load_dataset('nlpai-lab/kullm-v2')['train'].remove_columns('id')
-    kullm_v2 = kullm_v2.train_test_split(test_size=1000)
-    if split == 'train':
-        return kullm_v2['train']
-    elif split == 'test':
-        return kullm_v2['test']
+    kullm_v2 = load_dataset('nlpai-lab/kullm-v2')[split].remove_columns('id')
+
+    # slicing to max_examples
+    if max_examples:
+        kullm_v2 = kullm_v2.train_test_split(train_size=max_examples)['train']
+
+    # if split == 'train':
+    #     return kullm_v2['train']
+    # elif split == 'test':
+    #     return kullm_v2['test']
+    return kullm_v2
 
 
 def _kobest_processor(max_examples, split):
