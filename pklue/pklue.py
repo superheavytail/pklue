@@ -19,7 +19,9 @@ from datasets import concatenate_datasets
 
 from . import processors
 
-AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1']
+AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
+                      'kullm2_alpaca_gpt4', 'kullm2_xp3x_filtered_gpt4', 'kullm2_dolly_gpt4', 'kullm2_aya',
+                      'koalpaca_v1_1', 'alpaca_gpt4']
 
 
 def get_mixture(
@@ -47,5 +49,4 @@ def get_mixture(
 
 
 if __name__ == '__main__':
-    d = get_mixture(['klue', 'kobest'], 3000, 'train')
     raise NotImplementedError

@@ -14,8 +14,9 @@
 
 """processors for datasets"""
 import os
+import random
 
-from datasets import load_dataset, concatenate_datasets
+from datasets import load_dataset, concatenate_datasets, Dataset
 
 from .utils import list_to_dataset
 from .utils import make_prompts_by_random_template
@@ -180,3 +181,76 @@ def _korquad_v1_processor(max_examples, split):
     prompts = make_prompts_by_random_template(ds, "korquad_v1", None)
     prompts = list_to_dataset(prompts)
     return prompts
+
+
+# === for developing KULLM2 ===
+def _kullm2_rename(ds, max_examples):
+    """kullm2 데이터셋에서 공통된 작업
+
+    column name을 'answer'에서 'output'으로 바꾸고 max_example 적용"""
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+    if 'answer' in ds.column_names:
+        ds = ds.rename_column("answer", "output")
+    return ds
+
+
+def _kullm2_alpaca_gpt4_processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm2-alpaca-gpt4")['train']
+    l = []
+    for e in ds:
+        r = random.random()
+        # 임의 확률에 따라 무작위로 instruction과 input 순서 및 공백 변경
+        if r < 0.4:
+            inst = f"{e['instruction']}\n{e['input']}"
+        elif r < 0.7:
+            inst = f"{e['instruction']} {e['input']}"
+        elif r < 0.96:
+            inst = f"{e['instruction']} \n\n{e['input']}\n"
+        else:
+            inst = f"{e['input']}\n{e['instruction']}"
+        l.append({
+            'instruction': inst,
+            'answer': e['answer']
+        })
+    ds = Dataset.from_list(l)
+    return _kullm2_rename(ds, max_examples)
+
+
+def _kullm2_xp3x_filtered_gpt4_processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm2-xp3x-filtered-gpt4")[split]
+    return _kullm2_rename(ds, max_examples)
+
+
+def _kullm2_dolly_gpt4_processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm2-dolly-gpt4")[split]
+    return _kullm2_rename(ds, max_examples)
+
+
+def _kullm2_aya_processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm2-aya")[split]
+    return _kullm2_rename(ds, max_examples)
+
+
+def _koalpaca_v1_1_processor(max_examples, split):
+    ds = load_dataset("beomi/KoAlpaca-v1.1a")[split]
+    ds = ds.select_columns(['instruction', 'output'])
+    return _kullm2_rename(ds, max_examples)
+
+
+def _alpaca_gpt4_processor(max_examples, split):
+    ds = load_dataset("vicgalle/alpaca-gpt4")[split]
+    l = []
+    for e in ds:
+        if e['input']:
+            instruction = e['instruction']
+        else:
+            instruction = f"{e['instruction']}\n\n{e['input']}"
+        l.append({
+            'instruction': instruction,
+            'output': e['output']
+        })
+    return Dataset.from_list(l)
+
+
+
