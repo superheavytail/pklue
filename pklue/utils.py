@@ -35,7 +35,12 @@ def make_prompts_by_random_template(subset, dataset_name, subset_name):
     # making prompts for each dataset with randomly chosen template
     prompts = []
     if subset_name:
-        custom_templates = templates.datasets[f"{dataset_name}_{subset_name}"]
+        # custom_templates = templates.datasets[f"{dataset_name}_{subset_name}"]
+        # 임시로 wic가 동작하게 하기 위함 (나중에 없앨 것!)
+        if subset_name == 'wic' and (not 'oneprompt' in dataset_name):
+            custom_templates = templates.datasets[f"kobest_wic"]
+        else:
+            custom_templates = templates.datasets[f"{dataset_name}_{subset_name}"]
     else:
         custom_templates = templates.datasets[f"{dataset_name}"]
 

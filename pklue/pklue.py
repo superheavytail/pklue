@@ -19,7 +19,11 @@ from datasets import concatenate_datasets
 
 from . import processors
 
-AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1']
+AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
+                      'hyundai_nonhuman_kobest', 'hyundai_human_kobest', 'hyundai_nonhuman_agg_kobest', 'hyundai_human_agg_kobest',
+                      'hyundai_human_korquad_v1', 'hyundai_nonhuman_korquad_v1', 'hyundai_human_agg_korquad_v1', 'hyundai_nonhuman_agg_korquad_v1',
+                      'hyundai_oneprompt_kobest', 'hyundai_oneprompt_korquad_v1'
+                      ]
 
 
 def get_mixture(

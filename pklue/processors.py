@@ -71,6 +71,136 @@ def _kobest_processor(max_examples, split):
     return concatenated
 
 
+def _hyundai_nonhuman_kobest_processor(max_examples, split):
+    def load_kobest_part(name):
+        if split == 'train':
+            d = load_dataset('skt/kobest_v1', name, split=f"train")
+            if max_examples is not None and len(d) > max_examples:
+                d = d.train_test_split(train_size=max_examples)['train']
+            return d
+        elif split == 'test':
+            return load_dataset('skt/kobest_v1', name, split=f"test")
+
+    # you can modify below
+    subset_names = ['hellaswag', 'copa', 'boolq', 'sentineg', 'wic']
+
+    prompts_collection = {}
+    for subset_name in subset_names:
+        ds = load_kobest_part(subset_name)
+        prompts = make_prompts_by_random_template(ds, 'hyundai_nonhuman_kobest', subset_name)
+        prompts_collection[subset_name] = prompts
+
+    # concatenate all subsets into HF Dataset
+    prompts_datasets = {k: list_to_dataset(v, truncate=max_examples) for k, v in prompts_collection.items()}
+    concatenated = concatenate_datasets(list(prompts_datasets.values()))
+
+    return concatenated
+
+
+def _hyundai_human_kobest_processor(max_examples, split):
+    def load_kobest_part(name):
+        if split == 'train':
+            d = load_dataset('skt/kobest_v1', name, split=f"train")
+            if max_examples is not None and len(d) > max_examples:
+                d = d.train_test_split(train_size=max_examples)['train']
+            return d
+        elif split == 'test':
+            return load_dataset('skt/kobest_v1', name, split=f"test")
+
+    # you can modify below
+    subset_names = ['hellaswag', 'copa', 'boolq', 'sentineg', 'wic']
+
+    prompts_collection = {}
+    for subset_name in subset_names:
+        ds = load_kobest_part(subset_name)
+        prompts = make_prompts_by_random_template(ds, 'hyundai_human_kobest', subset_name)
+        prompts_collection[subset_name] = prompts
+
+    # concatenate all subsets into HF Dataset
+    prompts_datasets = {k: list_to_dataset(v, truncate=max_examples) for k, v in prompts_collection.items()}
+    concatenated = concatenate_datasets(list(prompts_datasets.values()))
+
+    return concatenated
+
+
+def _hyundai_human_agg_kobest_processor(max_examples, split):
+    def load_kobest_part(name):
+        if split == 'train':
+            d = load_dataset('skt/kobest_v1', name, split=f"train")
+            if max_examples is not None and len(d) > max_examples:
+                d = d.train_test_split(train_size=max_examples)['train']
+            return d
+        elif split == 'test':
+            return load_dataset('skt/kobest_v1', name, split=f"test")
+
+    # you can modify below
+    subset_names = ['hellaswag', 'copa', 'boolq', 'sentineg', 'wic']
+
+    prompts_collection = {}
+    for subset_name in subset_names:
+        ds = load_kobest_part(subset_name)
+        prompts = make_prompts_by_random_template(ds, 'hyundai_human_agg_kobest', subset_name)
+        prompts_collection[subset_name] = prompts
+
+    # concatenate all subsets into HF Dataset
+    prompts_datasets = {k: list_to_dataset(v, truncate=max_examples) for k, v in prompts_collection.items()}
+    concatenated = concatenate_datasets(list(prompts_datasets.values()))
+
+    return concatenated
+
+
+def _hyundai_nonhuman_agg_kobest_processor(max_examples, split):
+    def load_kobest_part(name):
+        if split == 'train':
+            d = load_dataset('skt/kobest_v1', name, split=f"train")
+            if max_examples is not None and len(d) > max_examples:
+                d = d.train_test_split(train_size=max_examples)['train']
+            return d
+        elif split == 'test':
+            return load_dataset('skt/kobest_v1', name, split=f"test")
+
+    # you can modify below
+    subset_names = ['hellaswag', 'copa', 'boolq', 'sentineg', 'wic']
+
+    prompts_collection = {}
+    for subset_name in subset_names:
+        ds = load_kobest_part(subset_name)
+        prompts = make_prompts_by_random_template(ds, 'hyundai_nonhuman_agg_kobest', subset_name)
+        prompts_collection[subset_name] = prompts
+
+    # concatenate all subsets into HF Dataset
+    prompts_datasets = {k: list_to_dataset(v, truncate=max_examples) for k, v in prompts_collection.items()}
+    concatenated = concatenate_datasets(list(prompts_datasets.values()))
+
+    return concatenated
+
+
+def _hyundai_oneprompt_kobest_processor(max_examples, split):
+    def load_kobest_part(name):
+        if split == 'train':
+            d = load_dataset('skt/kobest_v1', name, split=f"train")
+            if max_examples is not None and len(d) > max_examples:
+                d = d.train_test_split(train_size=max_examples)['train']
+            return d
+        elif split == 'test':
+            return load_dataset('skt/kobest_v1', name, split=f"test")
+
+    # you can modify below
+    subset_names = ['hellaswag', 'copa', 'boolq', 'sentineg', 'wic']
+
+    prompts_collection = {}
+    for subset_name in subset_names:
+        ds = load_kobest_part(subset_name)
+        prompts = make_prompts_by_random_template(ds, 'hyundai_oneprompt_kobest', subset_name)
+        prompts_collection[subset_name] = prompts
+
+    # concatenate all subsets into HF Dataset
+    prompts_datasets = {k: list_to_dataset(v, truncate=max_examples) for k, v in prompts_collection.items()}
+    concatenated = concatenate_datasets(list(prompts_datasets.values()))
+
+    return concatenated
+
+
 def _klue_processor(max_examples, split):
     def load_klue_part(name):
         if split == 'train':
@@ -178,5 +308,65 @@ def _korquad_v1_processor(max_examples, split):
         ds = ds.train_test_split(train_size=max_examples)['train']
 
     prompts = make_prompts_by_random_template(ds, "korquad_v1", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _hyundai_human_korquad_v1_processor(max_examples, split):
+    ds = load_dataset("squad_kor_v1")[split]
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "hyundai_human_korquad_v1", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _hyundai_nonhuman_korquad_v1_processor(max_examples, split):
+    ds = load_dataset("squad_kor_v1")[split]
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "hyundai_nonhuman_korquad_v1", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _hyundai_human_agg_korquad_v1_processor(max_examples, split):
+    ds = load_dataset("squad_kor_v1")[split]
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "hyundai_human_agg_korquad_v1", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _hyundai_nonhuman_agg_korquad_v1_processor(max_examples, split):
+    ds = load_dataset("squad_kor_v1")[split]
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "hyundai_nonhuman_agg_korquad_v1", None)
+    prompts = list_to_dataset(prompts)
+    return prompts
+
+
+def _hyundai_oneprompt_korquad_v1_processor(max_examples, split):
+    ds = load_dataset("squad_kor_v1")[split]
+
+    # slicing to max_examples
+    if max_examples:
+        ds = ds.train_test_split(train_size=max_examples)['train']
+
+    prompts = make_prompts_by_random_template(ds, "hyundai_oneprompt_korquad_v1", None)
     prompts = list_to_dataset(prompts)
     return prompts
