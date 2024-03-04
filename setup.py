@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pklue",
-    version="0.3.0",
+    version="0.3.1",
     description="Korean Datasets for Instruction Tuning",
     packages=find_packages(),
     author="Jeongwook Kim",

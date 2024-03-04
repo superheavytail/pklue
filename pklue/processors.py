@@ -196,7 +196,7 @@ def _kullm2_rename(ds, max_examples):
 
 
 def _kullm2_alpaca_gpt4_processor(max_examples, split):
-    ds = load_dataset("nlpai-lab/kullm2-alpaca-gpt4")['train']
+    ds = load_dataset("nlpai-lab/kullm2-alpaca-gpt4")[split]
     l = []
     for e in ds:
         r = random.random()
@@ -250,7 +250,4 @@ def _alpaca_gpt4_processor(max_examples, split):
             'instruction': instruction,
             'output': e['output']
         })
-    return Dataset.from_list(l)
-
-
-
+    return _kullm2_rename(Dataset.from_list(l), max_examples)
