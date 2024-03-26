@@ -251,3 +251,13 @@ def _alpaca_gpt4_processor(max_examples, split):
             'output': e['output']
         })
     return _kullm3_rename(Dataset.from_list(l), max_examples)
+
+
+def _kullm3_personal_info_processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm3-personal-info")[split]
+    return _kullm3_rename(ds, max_examples)
+
+
+def _kullm3_square_gpt4_sampled_processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm3-square-gpt4-sampled")[split]
+    return _kullm3_rename(ds, max_examples)

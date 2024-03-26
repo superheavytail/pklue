@@ -21,6 +21,7 @@ from . import processors
 
 AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
                       'kullm3_alpaca_gpt4', 'kullm3_xp3x_filtered_gpt4', 'kullm3_dolly_gpt4', 'kullm3_aya',
+                      'kullm3_personal_info', 'kullm3_square_gpt4_sampled',
                       'koalpaca_v1_1', 'alpaca_gpt4']
 
 
