@@ -196,24 +196,25 @@ def _kullm3_rename(ds, max_examples):
 
 
 def _kullm3_alpaca_gpt4_processor(max_examples, split):
+    # ds = load_dataset("nlpai-lab/kullm3-alpaca-gpt4")[split]
+    # l = []
+    # for e in ds:
+    #     r = random.random()
+    #     # 임의 확률에 따라 무작위로 instruction과 input 순서 및 공백 변경
+    #     if r < 0.4:
+    #         inst = f"{e['instruction']}\n{e['input']}"
+    #     elif r < 0.7:
+    #         inst = f"{e['instruction']} {e['input']}"
+    #     elif r < 0.96:
+    #         inst = f"{e['instruction']} \n\n{e['input']}\n"
+    #     else:
+    #         inst = f"{e['input']}\n{e['instruction']}"
+    #     l.append({
+    #         'instruction': inst,
+    #         'answer': e['answer']
+    #     })
+    # ds = Dataset.from_list(l)
     ds = load_dataset("nlpai-lab/kullm3-alpaca-gpt4")[split]
-    l = []
-    for e in ds:
-        r = random.random()
-        # 임의 확률에 따라 무작위로 instruction과 input 순서 및 공백 변경
-        if r < 0.4:
-            inst = f"{e['instruction']}\n{e['input']}"
-        elif r < 0.7:
-            inst = f"{e['instruction']} {e['input']}"
-        elif r < 0.96:
-            inst = f"{e['instruction']} \n\n{e['input']}\n"
-        else:
-            inst = f"{e['input']}\n{e['instruction']}"
-        l.append({
-            'instruction': inst,
-            'answer': e['answer']
-        })
-    ds = Dataset.from_list(l)
     return _kullm3_rename(ds, max_examples)
 
 
