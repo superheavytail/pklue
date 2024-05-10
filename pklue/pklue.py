@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from typing import List
+from pathlib import Path
 
 import datasets
 from datasets import concatenate_datasets
@@ -25,7 +26,7 @@ AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 
                       'koalpaca_v1_1', 'alpaca_gpt4']
 
 
-def get_mixture(
+def get_mixture_old(
         dataset_names: List[str],
         max_examples: int = None,
         split: str = 'train',
@@ -47,6 +48,30 @@ def get_mixture(
 
     # return concatenate_datasets(processed_datasets).shuffle()
     return concatenate_datasets(processed_datasets)
+
+
+def get_mixture(
+        dataset_names: List[str],
+        max_examples: int = None,
+        split: str = 'train',
+        verbose: bool = False) -> datasets.Dataset:
+    """Make mixed huggingface dataset with selected datasets.
+
+    Args:
+        dataset_names: list of dataset names. names are case-insensitive.
+        max_examples: the number of maximum length of examples when do truncation.
+        split: 'train' or 'test'
+        verbose: if set True, it prints debugging message.
+    Returns:
+        Huggingface dataset which contains mixture of 'dataset_names'.
+        Returned dataset's columns are like
+        {"instruction", "input", "output"} or {"prompt", "completion"} or {"chat"}
+    """
+    available_dataset = [e.name for e in Path("./available_dataset/").glob("*")]
+    assert all(n.lower() in available_dataset for n in dataset_names), "Invalid dataset name"
+    
+
+
 
 
 if __name__ == '__main__':
