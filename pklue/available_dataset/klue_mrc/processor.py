@@ -1,9 +1,9 @@
 from pathlib import Path
 
 import yaml
-from datasets import load_dataset, Dataset
+from datasets import load_dataset
 
-from ...utils import _make_options_str, make_random_template_data
+from ...utils import make_random_template_data
 
 
 def process(max_examples, split):

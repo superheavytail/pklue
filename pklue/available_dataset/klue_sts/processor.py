@@ -1,8 +1,7 @@
-import random
 from pathlib import Path
 
 import yaml
-from datasets import load_dataset, Dataset
+from datasets import load_dataset
 
 from ...utils import make_random_template_data
 
