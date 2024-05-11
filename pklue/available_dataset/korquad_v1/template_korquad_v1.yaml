@@ -1,0 +1,5 @@
+# keys: title, context, question, answer
+korquad_v1:
+  -
+    'prompt': 'Title: {title}\n\nBackground: {context}\n\nQuestion: {question}\n\nAnswer:'
+    'completion': '{answer}'
