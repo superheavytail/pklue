@@ -1,0 +1,17 @@
+# keys in data: title, options, answer
+
+template:
+  - instruction: '{query}'
+    output: '{response}'
+
+  - instruction: '{query}'
+    output: '{response}'
+
+  - instruction: '\n{query}'
+    output: '{response}'
+
+  - instruction: '{query}\n'
+    output: '{response}'
+
+  - instruction: '{query}\n\n'
+    output: '{response}'

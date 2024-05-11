@@ -14,6 +14,7 @@
 
 from typing import List
 from pathlib import Path
+import importlib
 
 import datasets
 from datasets import concatenate_datasets
@@ -21,6 +22,10 @@ from datasets import concatenate_datasets
 from . import processors
 
 AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
+                      'kullm3_alpaca_gpt4', 'kullm3_xp3x_filtered_gpt4', 'kullm3_dolly_gpt4', 'kullm3_aya',
+                      'kullm3_personal_info', 'kullm3_square_gpt4_sampled',
+                      'koalpaca_v1_1', 'alpaca_gpt4']
+AVAILABLE_DATASETS2 = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
                       'kullm3_alpaca_gpt4', 'kullm3_xp3x_filtered_gpt4', 'kullm3_dolly_gpt4', 'kullm3_aya',
                       'kullm3_personal_info', 'kullm3_square_gpt4_sampled',
                       'koalpaca_v1_1', 'alpaca_gpt4']
@@ -67,11 +72,15 @@ def get_mixture(
         Returned dataset's columns are like
         {"instruction", "input", "output"} or {"prompt", "completion"} or {"chat"}
     """
-    available_dataset = [e.name for e in Path("./available_dataset/").glob("*")]
-    assert all(n.lower() in available_dataset for n in dataset_names), "Invalid dataset name"
-    
+    available_dataset = [e.name for e in (Path(__file__).parent / "available_dataset/").glob("*/")]
+    assert all(n in available_dataset for n in dataset_names), f"Invalid dataset name. available: {available_dataset}"
 
+    processed_datasets = []
+    for dataset_name in dataset_names:
+        module = importlib.import_module(f".available_dataset.{dataset_name}.processor", package='pklue')
+        processed_datasets.append(module.process(max_examples, split))
 
+    return concatenate_datasets(processed_datasets)
 
 
 if __name__ == '__main__':

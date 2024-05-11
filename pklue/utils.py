@@ -50,3 +50,23 @@ def make_prompts_by_random_template(subset, dataset_name, subset_name):
         if prompt is not None:
             prompts.append(prompt)
     return prompts
+
+def make_prompts_by_random_template_(subset, dataset_name, subset_name, template):
+    # making prompts for each dataset with randomly chosen template
+    prompts = []
+    if subset_name:
+        custom_templates = templates.datasets[f"{dataset_name}_{subset_name}"]
+    else:
+        custom_templates = templates.datasets[f"{dataset_name}"]
+
+    for i, row in enumerate(subset):
+        template = choice(custom_templates)
+
+        if subset_name:
+            prompt = getattr(templates, f"_process_{dataset_name}_{subset_name}")(template, **row)
+        else:
+            prompt = getattr(templates, f"_process_{dataset_name}")(template, **row)
+
+        if prompt is not None:
+            prompts.append(prompt)
+    return prompts

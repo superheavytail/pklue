@@ -10,8 +10,10 @@ def process(max_examples, split):
         else:
             prompt = f"{e['instruction']}\n\n{e['input']}"
         l.append({
-            'prompt': prompt,
-            'output': e['output']
+            'chat': [
+                ('user', prompt),
+                ('assistant', e['output'])
+            ]
         })
     ds = Dataset.from_list(l)
 
