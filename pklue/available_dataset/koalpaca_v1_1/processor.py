@@ -4,7 +4,8 @@ from ...utils import convert_to_chat
 
 
 def process(max_examples, split):
-    ds = load_dataset("nlpai-lab/kullm3-alpaca-gpt4")[split]
+    ds = load_dataset("beomi/KoAlpaca-v1.1a")[split]
+    ds = ds.select_columns(['instruction', 'output'])
 
     if max_examples:
         ds = ds.train_test_split(train_size=max_examples)['train']
