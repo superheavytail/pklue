@@ -3,7 +3,7 @@ from pathlib import Path
 import yaml
 from datasets import load_dataset, Dataset
 
-from ...utils import _make_options_str, make_random_template_data
+from ...utils import _make_options_str, make_random_template_data, convert_to_chat
 
 
 def process(max_examples, split):
@@ -29,5 +29,5 @@ def process(max_examples, split):
     )
 
     new_ds = make_random_template_data(templates, new_ds, max_examples)
-
+    new_ds = convert_to_chat(new_ds)
     return new_ds

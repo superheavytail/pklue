@@ -97,3 +97,15 @@ def make_random_template_data(given_templates, data, max_examples):
         new_ds = new_ds.train_test_split(train_size=max_examples)['train']
 
     return new_ds
+
+
+def convert_to_chat(data: Dataset):
+    original_column_names = {'prompt', 'completion'}
+    assert set(data.column_names) == original_column_names
+    new_data = data.map(
+        lambda item: {'chat': [
+            ('user', item['prompt']), ('assistant', item['completion'])
+        ]},
+        remove_columns=list(original_column_names)
+    )
+    return new_data
