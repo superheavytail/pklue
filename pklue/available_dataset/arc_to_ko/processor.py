@@ -1,9 +1,11 @@
 from pathlib import Path
-import os
 import random
 
-from datasets import load_dataset, Dataset
+from datasets import Dataset
 import yaml
+
+
+from ...utils import load_dataset_max_examples
 
 
 def _process_ko_arc(template, **raw_data):
@@ -12,11 +14,7 @@ def _process_ko_arc(template, **raw_data):
 
 
 def process(max_examples, split):
-    ds = load_dataset("heavytail/ko_arc")[split]
-
-    # slicing to max_examples
-    if max_examples:
-        ds = ds.train_test_split(train_size=max_examples)['train']
+    ds = load_dataset_max_examples("heavytail/ko_arc", split, max_examples)
 
     # apply random template
     with open(Path(__file__).parent / "template.yaml", 'rt') as f:

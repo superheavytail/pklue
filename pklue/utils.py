@@ -16,7 +16,7 @@
 
 from random import choice
 
-from datasets import Dataset
+from datasets import Dataset, load_dataset
 
 from . import templates
 
@@ -82,7 +82,7 @@ def _make_options_str(*options):
     return '\n'.join(l)
 
 
-def make_random_template_data(given_templates, data, max_examples):
+def make_random_template_data(given_templates, data):
     def replace_xa0_if_str(x):
         if isinstance(x, str):
             x = x.replace(u'\xa0', u'')
@@ -93,9 +93,6 @@ def make_random_template_data(given_templates, data, max_examples):
             {k2: replace_xa0_if_str(v2) for k2, v2 in item.items()}  # sometimes u'\xa0' appears, so replace it.
         ) for k, v in choice(given_templates).items()} for item in data
     ])
-
-    if max_examples:
-        new_ds = new_ds.train_test_split(train_size=max_examples)['train']
 
     return new_ds
 
@@ -110,3 +107,13 @@ def convert_to_chat(data: Dataset):
         remove_columns=list(original_column_names)
     )
     return new_data
+
+
+def load_dataset_max_examples(dataset_name, split, max_examples, subset: str = None):
+    if subset:
+        ds = load_dataset(dataset_name, subset, split=split)
+    else:
+        ds = load_dataset(dataset_name, split=split)
+    if max_examples and max_examples < len(ds):
+        ds = ds.train_test_split(train_size=max_examples)['train']
+    return ds

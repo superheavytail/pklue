@@ -1,16 +1,12 @@
 from pathlib import Path
 
-from datasets import load_dataset
 import yaml
 
-from ...utils import convert_to_chat, _make_options_str, make_random_template_data
+from ...utils import convert_to_chat, _make_options_str, make_random_template_data, load_dataset_max_examples
 
 
 def process(max_examples, split):
-    ds = load_dataset('skt/kobest_v1', 'copa', split=split)
-
-    if max_examples:
-        ds = ds.train_test_split(train_size=max_examples)['train']
+    ds = load_dataset_max_examples('skt/kobest_v1', split, max_examples, subset='copa')
 
     # add [options, euro_or_ro(으로/로), eun_or_neun(은/는), answer] columns to dataset
     def adding_columns(example):
@@ -37,7 +33,7 @@ def process(max_examples, split):
 
     with open(Path(__file__).parent / "template_copa.yaml", 'rt', encoding='utf-8') as f:
         templates = yaml.load(f, Loader=yaml.BaseLoader)['kobest_copa']
-    new_ds = make_random_template_data(templates, new_ds, max_examples)
+    new_ds = make_random_template_data(templates, new_ds)
 
     new_ds = convert_to_chat(new_ds)
 

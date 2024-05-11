@@ -1,8 +1,10 @@
-from datasets import load_dataset, Dataset
+from datasets import Dataset
+
+from ...utils import load_dataset_max_examples
 
 
 def process(max_examples, split):
-    ds = load_dataset("vicgalle/alpaca-gpt4")[split]
+    ds = load_dataset_max_examples("vicgalle/alpaca-gpt4", split, max_examples)
     l = []
     for e in ds:
         if e['input']:
@@ -16,8 +18,5 @@ def process(max_examples, split):
             ]
         })
     ds = Dataset.from_list(l)
-
-    if max_examples:
-        ds = ds.train_test_split(train_size=max_examples)['train']
 
     return ds

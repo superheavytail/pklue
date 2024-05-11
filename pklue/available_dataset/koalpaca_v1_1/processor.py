@@ -1,14 +1,9 @@
-from datasets import load_dataset
-
-from ...utils import convert_to_chat
+from ...utils import convert_to_chat, load_dataset_max_examples
 
 
 def process(max_examples, split):
-    ds = load_dataset("beomi/KoAlpaca-v1.1a")[split]
+    ds = load_dataset_max_examples("beomi/KoAlpaca-v1.1a", split, max_examples)
     ds = ds.select_columns(['instruction', 'output'])
-
-    if max_examples:
-        ds = ds.train_test_split(train_size=max_examples)['train']
 
     # change 'instruction', 'output' column names to 'user', 'assistant' and make it dictionary form
     ds = ds.rename_columns({

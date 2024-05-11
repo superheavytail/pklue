@@ -1,11 +1,10 @@
-from datasets import load_dataset, Dataset
+from datasets import Dataset
+
+from ...utils import load_dataset_max_examples
 
 
 def processor(max_examples, split):
-    ds = load_dataset("nlpai-lab/kullm3-aya")[split]
-
-    if max_examples:
-        ds = ds.train_test_split(train_size=max_examples)['train']
+    ds = load_dataset_max_examples("nlpai-lab/kullm3-aya", split, max_examples)
 
     # change 'instruction', 'output' column names to 'user', 'assistant' and make it dictionary form
     ds = Dataset.from_list([{
@@ -13,4 +12,3 @@ def processor(max_examples, split):
     } for e in ds])
 
     return ds
-    
