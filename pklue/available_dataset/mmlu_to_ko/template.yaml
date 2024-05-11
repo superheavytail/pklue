@@ -1,0 +1,20 @@
+# keys: input, A, B, C, D, target, gold
+templates:
+  -
+    prompt: "{input}\nA: {A}\nB: {B}\nC: {C}\nD: {D}"
+    completion: "{target}. {gold}"
+  -
+    prompt: "{input}\n\nA: {A}\nB: {B}\nC: {C}\nD: {D}\n"
+    completion: "{gold}"
+  -
+    prompt: "{input}\n\nA: {A}\nB: {B}\nC: {C}\nD: {D}"
+    completion: "{gold}"
+  -
+    prompt: "\n{input}\n\n\nA:\n{A}\nB:\n{B}\nC:\n{C}\nD:\n{D}"
+    completion: "{gold}"
+  -
+    prompt: "{input}"
+    completion: "{gold}"
+  -
+    prompt: "{input}"
+    completion: "{gold}"

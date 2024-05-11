@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import yaml
-from datasets import load_dataset
 
 from ...utils import _make_options_str, make_random_template_data, convert_to_chat, load_dataset_max_examples
 
