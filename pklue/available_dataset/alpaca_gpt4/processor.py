@@ -7,7 +7,7 @@ def process(max_examples, split):
     ds = load_dataset_max_examples("vicgalle/alpaca-gpt4", split, max_examples)
     l = []
     for e in ds:
-        if e['input']:
+        if not e['input']:
             prompt = e['instruction']
         else:
             prompt = f"{e['instruction']}\n\n{e['input']}"
