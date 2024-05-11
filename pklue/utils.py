@@ -53,6 +53,7 @@ def make_prompts_by_random_template(subset, dataset_name, subset_name):
 
 
 def make_prompts_by_random_template_(subset, dataset_name, subset_name, template):
+    """will be deleted in future version"""
     # making prompts for each dataset with randomly chosen template
     prompts = []
     if subset_name:

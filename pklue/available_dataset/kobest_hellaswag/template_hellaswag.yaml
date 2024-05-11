@@ -1,0 +1,32 @@
+# context, options, label, ending_1, ending_2, ending_3, ending_4, answer
+kobest_hellaswag:
+  -
+    prompt: "다음의 글을 읽고 물음에 답하세요.\n\n{context}\n\n글에서 이어질 문장으로 가장 올바른 것은?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "'{context}'\n이어질 말로 제일 적당한 문장을 골라 줘.\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "'{context}'\n에 가장 어울리는 다음 말은?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{options}\n주어진 선택지 중 다음 단락에 이어지기에 가장 자연스러운 것은?\n{context}"
+    completion: "{answer}"
+  -
+    prompt: "{context}\n\n주어진 지문을 계속 쓴다면 다음에 올 말을 선택해.\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "아래 단락 이후에 어떤 일이 일어날까?\n{context}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "글에 이어서 문장을 더 써줘.\n{context}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "가장 합리적인 다음 문장은?\n{context}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "이 이야기가 어떻게 끝날까??\n{context}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{answer}\n이 문장 이전에 있을 법한 이야기를 써 줘."
+    completion: "{context}"
