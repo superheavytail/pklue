@@ -1,0 +1,32 @@
+# premise, question, options, euro_or_ro(으로/로), eun_or_neun(은/는), answer
+kobest_copa:
+  -
+    prompt: "다음 상황이 주어졌을 때, 이 상황의 {question}{euro_or_ro} 적절한 것을 고르시오.\n상황: {premise}\n\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{premise}\n위 사건의 {question}{eun_or_neun}?\n상황: {premise}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "'{premise}'가 일어나게 된 {question}{eun_or_neun}??\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "다음 현상의 {question}{euro_or_ro} 더 적절한 것을 골라줘.\n{premise}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{options}\n\n둘 중에 {premise}의 {question}인 것은 무엇인가?"
+    completion: "{answer}"
+  -
+    prompt: "{premise}의 {question} 생성해\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "현상: {premise}\n{question}:\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "아래 글을 읽고 물음에 답하시오.\n{premise}\n{question}{eun_or_neun} 무엇인가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "가장 합리적인 선택지를 골라.\n'{premise}'의 {question}{eun_or_neun}?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "'{answer}'가 {question}인 사건을 생성해 줘."
+    completion: "{premise}"
