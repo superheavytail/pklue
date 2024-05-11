@@ -1,0 +1,33 @@
+# keys in raw data:
+# sentence1, sentence2
+klue_sts:
+  -
+    prompt: "{sentence1}\n위 문장을 비슷한 말로 바꾸어 주세요.\n"
+    completion: "{sentence2}"
+  -
+    prompt: "{sentence1}\n이 말을 다른 문장으로 써 줘.\n"
+    completion: "{sentence2}"
+  -
+    prompt: "{sentence1}\n이 말을 다른 말로 다시 쓰면?\n"
+    completion: "{sentence2}"
+  -
+    prompt: "{sentence1}\n\n주어진 문장을 같은 뜻을 가진 다른 문장으로 바꾸시오."
+    completion: "{sentence2}"
+  -
+    prompt: "{sentence1}\n를 같은 의미지만 비슷하게 말해봐.\n"
+    completion: "{sentence2}"
+  -
+    prompt: "아래 문장을 비슷하게 다시 바꿔보세요.\n\n{sentence1}\n"
+    completion: "{sentence2}"
+  -
+    prompt: "당신은 주어진 문장을 같은 의미이지만 다른 말로 바꾸어 말하는 기계입니다.\n\n문장:\n{sentence1}\n"
+    completion: "{sentence2}"
+  -
+    prompt: "다음 문장을 비슷하게 다시 표현하면?\n\n{sentence1}\n"
+    completion: "{sentence2}"
+  -
+    prompt: "다음에 오는 말을 살짝 다르게 다시 쓰세요.\n\n{sentence1}\n"
+    completion: "{sentence2}"
+  -
+    prompt: "다음에 주어지는 문장을 문맥에 맞게 다시 표현해서 말해봐.\n\n{sentence1}\n"
+    completion: "{sentence2}"

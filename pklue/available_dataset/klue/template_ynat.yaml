@@ -1,0 +1,47 @@
+# keys in raw data:
+# title, options, answer
+# options = "선택지:\n - IT과학\n - 경제\n - 사회\n - 생활문화\n - 세계\n - 스포츠\n - 정치"
+# answers(example) = "경제"
+klue_ynat:
+  -
+    instruction: "다음 기사 제목을 보고 카테고리를 분류해줘\n {title}\n{options} "
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "다음은 뉴스 기사의 제목이다. 이 기사의 유형을 분류한다면 다음 중 무엇인가?\n제목: {title}\n{options}"
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "너는 기사 제목을 유형에 맞게 분류하는 AI이다. 다음 제목을 보고 분류하시오.\n제목: {title}\n{options}"
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "\n헤드라인: {title}\n이 뉴스 기사는 어떻게 분류되어야 할까?\n{options}"
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "{title}\n이 제목은 어떤 섹션의 뉴스인가?\n{options}"
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "뉴스 기사 제목: {title}\n\n{options}\n\n유형 분류 결과:"
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "당신은 뉴스 기사의 제목을 보고 어떤 섹션으로 분류해야 할 지 판단하는 일을 하고 있다.\n\n제목: {title}\n\n{options}\n\n분류결과:"
+    input: ""
+    output: "{answer}"
+  -
+    instruction: "{options}\n\n중에서\n\n{title}\n위 제목을 분류한 결과는?"
+    input: ""
+    output: "{answer}"
+
+  # turn-around templates
+  -
+    instruction: "{answer} 유형의 뉴스 제목을 하나 뽑아줘\n"
+    input: ""
+    output: "{title}"
+  -
+    instruction: "뉴스 기사의 제목을 하나 생성해\n"
+    input: ""
+    output: "{title}"

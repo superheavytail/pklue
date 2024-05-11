@@ -1,0 +1,35 @@
+# keys in raw data:
+# premise, hypothesis, options, answer
+# options = "선택지:\n - 수반"
+klue_nli:
+  -
+    prompt: "전제: {premise}, 가정: {hypothesis}일 때, '전제'문장과 '가설'문장의 관계를 말하면?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "다음과 같이 전제 문장이 주어진다. \n'{premise}'\n\n그리고 가설 문장은 '{hypothesis}'\n\n일 때 전제는 가설을 수반하는가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "문장 1: {premise}\n문장 2: {hypothesis}\n문장 1은 문장 2를 수반하는가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "문장 A: '{premise}'\n\n문장 B: '{hypothesis}'\n일 때, 문장 A와 문장 B의 관계는?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{premise}\n에 미루어 볼 때, 문장\n{hypothesis}\n가 수반된다고 볼 수 있는가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "만약 '{premise}'\n가 성립한다면,\n'{hypothesis}'\n가 성립한다고 볼 수 있는가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "추론해보자. 만약 '{premise}'\n가 제시되면,\n'{hypothesis}'\n는 수반되는 결과일까?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "당신은 추론 능력이 있는 AI이다. 다음 두 문장은 어떤 관계인지 맞춰보자.\n\n'{premise}'\n'{hypothesis}'\n\n{options}"
+    completion: "{answer}"
+  # turn-around templates
+  -
+    prompt: "'{premise}'\n문장과 {answer} 관계에 있는 문장을 하나 생성하세요.\n"
+    completion: "{hypothesis}"
+  -
+    prompt: "다음 문장과 {answer} 관계의 문장을 써 줘.\n\n{premise}"
+    completion: "{hypothesis}"

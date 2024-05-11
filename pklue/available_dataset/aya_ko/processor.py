@@ -1,8 +1,8 @@
 from datasets import load_dataset, Dataset
 
 
-def process(max_examples, split):
-    ds = load_dataset("nlpai-lab/kullm3-alpaca-gpt4")[split]
+def processor(max_examples, split):
+    ds = load_dataset("nlpai-lab/kullm3-aya")[split]
 
     if max_examples:
         ds = ds.train_test_split(train_size=max_examples)['train']
@@ -13,3 +13,4 @@ def process(max_examples, split):
     } for e in ds])
 
     return ds
+    

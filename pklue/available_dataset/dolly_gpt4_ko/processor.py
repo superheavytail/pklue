@@ -2,7 +2,7 @@ from datasets import load_dataset, Dataset
 
 
 def process(max_examples, split):
-    ds = load_dataset("nlpai-lab/kullm3-alpaca-gpt4")[split]
+    ds = load_dataset("nlpai-lab/kullm3-dolly-gpt4")[split]
 
     if max_examples:
         ds = ds.train_test_split(train_size=max_examples)['train']
