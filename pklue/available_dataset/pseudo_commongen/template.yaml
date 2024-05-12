@@ -1,0 +1,11 @@
+# keys: query, response
+pseudo_commongen:
+  -
+    prompt: "{query}"
+    completion: "{response}"
+  -
+    prompt: "{query}"
+    completion: "{response}"
+  -
+    prompt: "{query}\n"
+    completion: "{response}"
