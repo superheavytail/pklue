@@ -1,0 +1,34 @@
+# keys: word, eun_or_neun, context_1, context_2, options, answer
+# options: "선택지\n - 같은 뜻입니다.\n - 다른 뜻입니다."
+# answer = {다른 뜻입니다., 같은 뜻입니다.}
+kobest_wic:
+  -
+    prompt: "'{context_1}'\n{context_2}\n두 문장에서 {word}{eun_or_neun} 같은 뜻인가, 다른 뜻인가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "다음 두 문맥에서 {word}{eun_or_neun} 같은 뜻으로 쓰였는지 알려주세요.\n'{context_1}'\n'{context_2}'\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "'{context_1}' 그리고 '{context_2}'에서 {word}{eun_or_neun} 동일한 뜻으로 사용되었는지 판단하면?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "1: {context_1}\n2: {context_2}\n1과 2에서 {word}{eun_or_neun} 같은 뜻으로 쓰였어?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "'{context_1}'\n{context_2}\n두 문장에서 쓰인 {word}{eun_or_neun} 같은 뜻으로 쓰였나요, 아니면 다른 뜻으로 쓰였나요?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "주어진 문맥\n(1) {context_1}\n(2) {context_2}\n에서 {word}{eun_or_neun} 같은 뜻이니?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "단어 {word}{eun_or_neun} 다음 두 문맥에서 같은 뜻으로 쓰였는지 구분해 봐.\n1. {context_1}\n2. {context_2}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{word}{eun_or_neun} 같은 뜻으로 쓰였습니까?\n문장 1: {context_1}\n문장 2: {context_2}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "문맥 두 개가 주어진다. 단어 {word}{eun_or_neun} 같은 뜻으로 쓰였는지 판단하시오. \n{context_1}\n{context_2}\n\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{word}{eun_or_neun} 여러 뜻을 가진다.\n문장 1: {context_1}\n문장 2: {context_2}\n\n문장 1과 2에서 {word}{eun_or_neun} 같은 뜻이에요?\n{options}"
+    completion: "{answer}"
