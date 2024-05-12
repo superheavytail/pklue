@@ -70,7 +70,7 @@ def get_mixture(
     Returns:
         Huggingface dataset which contains mixture of 'dataset_names'.
         Returned dataset's columns are like
-        {"instruction", "input", "output"} or {"prompt", "completion"} or {"chat"}
+        {"chat": [['user', '...'], ['assistant', '...'], ...]}
     """
     available_dataset = [e.name for e in (Path(__file__).parent / "available_dataset/").glob("*/")]
     assert all(n in available_dataset for n in dataset_names), f"Invalid dataset name. available: {available_dataset}"

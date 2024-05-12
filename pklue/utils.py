@@ -109,11 +109,13 @@ def convert_to_chat(data: Dataset):
     return new_data
 
 
-def load_dataset_max_examples(dataset_name, split, max_examples, subset: str = None):
-    if subset:
+def load_dataset_max_examples(dataset_name, split=None, max_examples=None, subset: str = None):
+    if subset and split:
         ds = load_dataset(dataset_name, subset, split=split)
-    else:
+    elif split:
         ds = load_dataset(dataset_name, split=split)
+    else:
+        ds = load_dataset(dataset_name)
     if max_examples and max_examples < len(ds):
         ds = ds.train_test_split(train_size=max_examples)['train']
     return ds
