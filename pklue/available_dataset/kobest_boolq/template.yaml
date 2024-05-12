@@ -1,0 +1,33 @@
+# keys: paragraph, question, options, answer
+# answer = {참, 거짓}
+kobest_boolq: 
+  - 
+    prompt: "{paragraph}\n윗글로 미루어볼 때 다음 문장은 참인가 거짓인가?\n{question}"
+    completion: "{answer}"
+  - 
+    prompt: "{paragraph}\n가 주어졌을 때\n{question}\n을 판단해주세요. \n{options}"
+    completion: "{answer}"
+  - 
+    prompt: "'{paragraph}'는 '{question}'을 함의한다. 진위 여부를 판별하면? \n{options}"
+    completion: "{answer}"
+  - 
+    prompt: "{options}\n{paragraph}\n안에는\n{question}\n라는 내용이 들어가 있다. 참 또는 거짓으로 대답해."
+    completion: "{answer}"
+  - 
+    prompt: "<보기>\n{paragraph}\n다음 문장은 참인가 거짓인가?\n{question}\n{options}"
+    completion: "{answer}"
+  - 
+    prompt: "지문:\n{paragraph}\n질문:\n{question}\n{options}\n정답:"
+    completion: "{answer}"
+  - 
+    prompt: "{paragraph}\n'{question}'는 참인가?\n{options}"
+    completion: "{answer}"
+  - 
+    prompt: "질문에 답하되, 지문에 근거하여 판단하세요.\n{question}은 옳은가?\n{paragraph}\n{options}"
+    completion: "{answer}"
+  - 
+    prompt: "다음 글\n{paragraph}\n을 보고 생각했을 때,\n{question}\n은 참이니?\n{options}"
+    completion: "{answer}"
+  - 
+    prompt: "참, 거짓 여부 판별\n\n근거: {paragraph}\n주장 또는 질문: {question}\n{options}"
+    completion: "{answer}"
