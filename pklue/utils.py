@@ -18,8 +18,6 @@ from random import choice
 
 from datasets import Dataset, load_dataset
 
-from . import templates
-
 
 def list_to_dataset(l, truncate=None):
     if truncate:
@@ -29,49 +27,6 @@ def list_to_dataset(l, truncate=None):
         for k, v in e.items():
             d[k].append(v)
     return Dataset.from_dict(d)
-
-
-def make_prompts_by_random_template(subset, dataset_name, subset_name):
-    # making prompts for each dataset with randomly chosen template
-    prompts = []
-    if subset_name:
-        custom_templates = templates.datasets[f"{dataset_name}_{subset_name}"]
-    else:
-        custom_templates = templates.datasets[f"{dataset_name}"]
-
-    for i, row in enumerate(subset):
-        template = choice(custom_templates)
-
-        if subset_name:
-            prompt = getattr(templates, f"_process_{dataset_name}_{subset_name}")(template, **row)
-        else:
-            prompt = getattr(templates, f"_process_{dataset_name}")(template, **row)
-
-        if prompt is not None:
-            prompts.append(prompt)
-    return prompts
-
-
-def make_prompts_by_random_template_(subset, dataset_name, subset_name, template):
-    """will be deleted in future version"""
-    # making prompts for each dataset with randomly chosen template
-    prompts = []
-    if subset_name:
-        custom_templates = templates.datasets[f"{dataset_name}_{subset_name}"]
-    else:
-        custom_templates = templates.datasets[f"{dataset_name}"]
-
-    for i, row in enumerate(subset):
-        template = choice(custom_templates)
-
-        if subset_name:
-            prompt = getattr(templates, f"_process_{dataset_name}_{subset_name}")(template, **row)
-        else:
-            prompt = getattr(templates, f"_process_{dataset_name}")(template, **row)
-
-        if prompt is not None:
-            prompts.append(prompt)
-    return prompts
 
 
 def _make_options_str(*options):

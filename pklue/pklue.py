@@ -19,54 +19,18 @@ import importlib
 import datasets
 from datasets import concatenate_datasets
 
-from . import processors
-
-AVAILABLE_DATASETS = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
-                      'kullm3_alpaca_gpt4', 'kullm3_xp3x_filtered_gpt4', 'kullm3_dolly_gpt4', 'kullm3_aya',
-                      'kullm3_personal_info', 'kullm3_square_gpt4_sampled',
-                      'koalpaca_v1_1', 'alpaca_gpt4']
-AVAILABLE_DATASETS2 = ['kullm_v2', 'kobest', 'klue', 'ko_arc', 'ko_commongenv2', 'ko_mmlu', 'ko_truthfulqa', 'korquad_v1',
-                      'kullm3_alpaca_gpt4', 'kullm3_xp3x_filtered_gpt4', 'kullm3_dolly_gpt4', 'kullm3_aya',
-                      'kullm3_personal_info', 'kullm3_square_gpt4_sampled',
-                      'koalpaca_v1_1', 'alpaca_gpt4']
-
-
-def get_mixture_old(
-        dataset_names: List[str],
-        max_examples: int = None,
-        split: str = 'train',
-        verbose: bool = False) -> datasets.Dataset:
-    """Make mixed huggingface dataset with selected datasets.
-
-    Args:
-        dataset_names: list of dataset names. names are case-insensitive.
-        max_examples: the number of maximum length of examples when do truncation.
-        split: 'train' or 'test'
-        verbose: if set True, it prints debugging message.
-    Returns:
-        Huggingface dataset which contains mixture of 'dataset_names'.
-        Returned dataset's columns are like {"instruction", "input", "output"}
-    """
-    assert all(n.lower() in AVAILABLE_DATASETS for n in dataset_names), "Invalid dataset name"
-
-    processed_datasets = [getattr(processors, f"_{d}_processor")(max_examples, split) for d in dataset_names]
-
-    # return concatenate_datasets(processed_datasets).shuffle()
-    return concatenate_datasets(processed_datasets)
-
 
 def get_mixture(
         dataset_names: List[str],
         max_examples: int = None,
         split: str = 'train',
-        verbose: bool = False) -> datasets.Dataset:
+) -> datasets.Dataset:
     """Make mixed huggingface dataset with selected datasets.
 
     Args:
         dataset_names: list of dataset names. names are case-insensitive.
         max_examples: the number of maximum length of examples when do truncation.
         split: 'train' or 'test'
-        verbose: if set True, it prints debugging message.
     Returns:
         Huggingface dataset which contains mixture of 'dataset_names'.
         Returned dataset's columns are like
