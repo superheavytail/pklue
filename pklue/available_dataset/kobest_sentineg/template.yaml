@@ -1,0 +1,34 @@
+# keys: sentence, options, answer
+# options: "선택지:\n - 긍정\n - 부정"
+# answer = {긍정, 부정}
+kobest_sentineg:
+  -
+    prompt: "다음 문장의 감정을 긍정 또는 부정으로 분류해 줘.\n{sentence}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{sentence}\n주어진 리뷰는 긍정적인가, 부정적인가?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{sentence}\n위 리뷰를 보고 감정을 분석하면?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "아래 리뷰를 긍정, 부정으로 분석해봐.\n{sentence}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "당신은 감성 분석하는 로봇입니다. 아래 문장의 분석 결과는?\n{sentence}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "화자의 감정 상태를 파악하세요.\n발화: {sentence}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "다음 쇼핑몰 후기의 감성을 분석해 줘.\n후기: {sentence}\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "{sentence}\n이 문장이 상품에 대해 어떻게 생각하고 있는 것 같니?\n{options}"
+    completion: "{answer}"
+  -
+    prompt: "쇼핑몰 후기 아무거나 한 문장 생성"
+    completion: "{sentence}"
+  -
+    prompt: "{answer}적인 상품 리뷰를 짧게 하나 써 줘."
+    completion: "{sentence}"
