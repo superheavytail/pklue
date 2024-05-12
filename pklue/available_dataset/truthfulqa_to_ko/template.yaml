@@ -1,0 +1,17 @@
+# key: query, response
+truthfulqa_to_ko:
+  -
+    prompt: "{query}"
+    completion: "{response}"
+  -
+    prompt: "{query}"
+    completion: "{response}"
+  -
+    prompt: "\n{query}\n"
+    completion: "{response}"
+  -
+    prompt: "{query}\n"
+    completion: "{response}"
+  -
+    prompt: "{query}\n\n"
+    completion: "{response}"
