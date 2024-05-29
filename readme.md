@@ -24,11 +24,6 @@ Instruction Tuning (IST)을 위해 만들어진 데이터셋이 아닌, 일반�
 [Huggingface datasets](https://huggingface.co/docs/datasets/index) 형태로 반환하기 때문에 
 [FLAN 리포지토리](https://github.com/google-research/FLAN)에서 제공하는 API보다 쉽게 응용할 수 있습니다.
 
-### 사용 가능한 데이터셋 목록
-- KULLM-v2
-- KoBEST (BoolQ, Sentineg, WiC, CoPA, hellaswag)
-- KLUE (STS, MRC, NLI, ynat)
-
 ### 설치 방법
 ```shell
 git clone https://github.com/superheavytail/pklue.git
