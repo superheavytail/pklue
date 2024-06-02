@@ -37,6 +37,7 @@ def get_mixture(
         {"chat": [['user', '...'], ['assistant', '...'], ...]}
     """
     available_dataset = [e.name for e in (Path(__file__).parent / "available_dataset/").glob("*/")]
+    assert isinstance(dataset_names, list), "dataset_names must be python list."
     assert all(n in available_dataset for n in dataset_names), f"Invalid dataset name. available: {available_dataset}"
 
     processed_datasets = []
