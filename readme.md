@@ -6,6 +6,7 @@
 
 - 2023.09.27: initial commit
 - 2023.09.28: remove redundants
+- 2024.05.25: big-refactored
 
 
 # pKLUE : Korean Dataset to Instruction Tuning
@@ -23,14 +24,11 @@ Instruction Tuning (IST)을 위해 만들어진 데이터셋이 아닌, 일반�
 [Huggingface datasets](https://huggingface.co/docs/datasets/index) 형태로 반환하기 때문에 
 [FLAN 리포지토리](https://github.com/google-research/FLAN)에서 제공하는 API보다 쉽게 응용할 수 있습니다.
 
-### 사용 가능한 데이터셋 목록
-- KULLM-v2
-- KoBEST (BoolQ, Sentineg, WiC, CoPA, hellaswag)
-- KLUE (STS, MRC, NLI, ynat)
-
 ### 설치 방법
 ```shell
-pip install pklue
+git clone https://github.com/superheavytail/pklue.git
+cd pklue
+pip install -e . 
 ```
 
 ## 데이터 사용 방법
@@ -49,7 +47,7 @@ from pklue import get_mixture
 my_hf_dataset = get_mixture(dataset_names=['kullm_v2', 'kobest', 'klue'], max_examples=3000, split='train')
 ```
 
-## 데이터 예시
+## 데이터 예시 (need to modified)
 ```json
 {"instruction": "아래 문장을 비슷하게 다시 바꿔보세요.\n\n숙소 위치는 찾기 쉽고 일반적인 한국의 반지하 숙소입니다.\n",
  "input": "",
