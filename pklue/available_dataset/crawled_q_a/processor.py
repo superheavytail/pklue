@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 
 def process(max_examples, split):
-    ds_dict = load_dataset("heavytail/crawled_q_and_a")
+    ds_dict = load_dataset("nlpai-lab/crawled_q_and_a")
 
     # change 'prompt', 'completion' column names to 'user', 'assistant' and make it chat form
     ds = Dataset.from_list([{
