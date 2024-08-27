@@ -3,9 +3,11 @@ from itertools import chain
 from datasets import Dataset, load_dataset, concatenate_datasets
 from tqdm import tqdm
 
+from ...utils import load_dataset_max_examples
+
 
 def process(max_examples, split):
-    ds = load_dataset("heavytail/neutral_crawled_q_a")
+    ds = load_dataset_max_examples("heavytail/neutral_crawled_q_a", split, max_examples)
 
     # change 'prompt', 'completion' column names to 'user', 'assistant' and make it chat form
     # ds = Dataset.from_list([{
