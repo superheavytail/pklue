@@ -14,10 +14,14 @@ def process(max_examples, split):
     for i in range(1000):
         l.append({
             'chat': [
-                ['user', kip.sentence(2000)],
-                ['assistant', kip.sentence(2000)],
-                ['user', kip.sentence(2000)],
-                ['assistant', kip.sentence(2000)],
+                ['user', kip.sentence(1000)],
+                ['assistant', kip.sentence(1000)],
+                ['user', kip.sentence(1000)],
+                ['assistant', kip.sentence(1000)],
+                ['user', kip.sentence(1000)],
+                ['assistant', kip.sentence(1000)],
+                ['user', kip.sentence(1000)],
+                ['assistant', kip.sentence(1000)],
             ]
         })
     return Dataset.from_list(l)
